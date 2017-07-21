@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{{title}}</title>
+    </head>
+
+    <style>
+    h1 {
+        text-align: center;
+    }
+    .nav li {
+        display: inline;
+        padding-right: e0px;
+    }
+    form {
+        background-color: green;
+        padding: 20px;
+        margin: 0 auto;
+        width: 540px;
+        font: 16px sans-serif;
+        border-radius: 10px;
+    }
+
+    textarea {
+        margin: 10px 0;
+        width: 540px;
+        height: 120px;
+    }
+    .error {
+        color: red;
+    }
+
+</style>
+<body>
+<div class="nav">
+    <ul>
+        <li><a href="/blog">Main Page</a></li>
+        <li><a href="/newpost">Add a Blog</a></li>
+    </ul>
+</div>
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
