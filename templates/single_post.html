@@ -1,0 +1,22 @@
+
+{%  extends "base.html" %}
+
+{%  block content %}
+
+ <ul>
+    <h1>{{ posts.title }}</h1>
+    <p>{{ posts.content }}</p>
+ </ul>
+{%  endblock %}
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1 style= "text-align:center;"> {{page_name}}</h1>
+<ul>
+    {% for user in users %}
+    <li><a href="/blog_page?email={{user.email}}">{{user.email}}</a></li>
+
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 style= "text-align:center;"> Build Your Blog!</h1>
+    <form style="
+                background-color: #eee;
+                padding: 20px;
+                margin: 0 auto;
+                width: 540px;
+                font: 16px sans-serif;
+                border-radius: 10px;" method='POST'>
+        <label>
+            Blog Title:
+            <input type="text" name='title' />
+        </label><br>
+        <br>
+        <br>
+        <label>Your New Blog:
+            <textarea name='content' style='margin: 10px 0;
+                width: 540px;
+                height: 120px;'></textarea>
+        </label>
+        <input type="submit" />
+    </form>
+
+
+
+<ul>
+    <h1>blog users!</h1>
+{% for user in users%}
+<li><a href='/blog?owner_id={{user.id}}'>
+
+{{user.username}}</a></li>
+{% endfor%}
+</ul>
+{% endblock %}
+Contact GitHub API Training Shop Blog About

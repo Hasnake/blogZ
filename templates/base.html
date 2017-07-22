@@ -10,17 +10,16 @@
     }
     .nav li {
         display: inline;
-        padding-right: e0px;
+        padding-right: 20px;
     }
     form {
-        background-color: green;
+        background-color: #eee;
         padding: 20px;
         margin: 0 auto;
         width: 540px;
         font: 16px sans-serif;
         border-radius: 10px;
     }
-
     textarea {
         margin: 10px 0;
         width: 540px;
@@ -29,17 +28,26 @@
     .error {
         color: red;
     }
-
+    .right {
+        float: right;
+    }
 </style>
 <body>
 <div class="nav">
     <ul>
         <li><a href="/blog">Main Page</a></li>
         <li><a href="/newpost">Add a Blog</a></li>
+        <li><a href="/">home</a></li>
+        <li><a href="/blog">all posts</a></li>
+        <li><a href="/newpost">new posts</a></li>
+        <li class="right"><a href="/login">login</a></li>
+       <li class="right"><a href="/login">logout</a></li>
+
     </ul>
 </div>
     {% block content %}
     {% endblock %}
 
 </body>
+</html>
 </html>
