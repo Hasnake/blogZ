@@ -11,7 +11,7 @@ db = SQLAlchemy(app)
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
-class Blog(db.Model): 
+class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120))
@@ -126,14 +126,10 @@ def blog():
 
 
 @app.route('/', methods=['POST', 'GET'])
-#def index():
-    # owner = User.query.filter_by(username=session['username']).first()
 def index():
 
     users = User.query.all()
     return render_template('index.html', users=users)
-
-    #return render_template('index.html')
 
 @app.route('/newpost', methods=['post', 'get'])
 def add():
@@ -142,7 +138,6 @@ def add():
     title_error = ""
     content_error =""
     if request.method == "POST":
-        #blog_id = request.form['id']
         blog_title = request.form['title']
         owner = User.query.filter_by(username=session['username']).first()
 
