@@ -61,16 +61,18 @@ def signup():
         username_error = ''
         verify_error = ''
 
+        if len(username)>=100 or len(username)==0:
+                username_error = "It should be between the limits."
+                return username_error
+        if len(username_error)>0:
+                        return "Test"
+
         if password != verify:
-            verify_error = "password does not match, please try again"
+            verify_error = "it isnot matched please try again"
             return verify_error
 
-        if len(username)>=120 or len(username)==0:
-                username_error = "Please enter a valid username"
-                return username_error
 
-        if len(username_error)>0:
-                return "Tast"
+
 
 
         existing_user = User.query.filter_by(username=username).first()
@@ -82,7 +84,7 @@ def signup():
 
             return redirect('/')
         else:
-            existing_username_error = "username already in use"
+            existing_username_error = "This username is used already."
 
     return render_template('signup.html')
 
@@ -123,9 +125,9 @@ def index():
     users = User.query.all()
     return render_template('index.html', users=users)
 
-@app.route('/newpost', methods=['post', 'get'])
+@app.route('/newpost', methods=['POST', 'GET'])
 def add():
-    post = ""
+    POST = ""
     new_blog = ""
     title_error = ""
     content_error =""
@@ -135,7 +137,7 @@ def add():
 
         if not blog_title:
             title_error = "you have to have a title for the blog"
-        elif len(blog_title) > 120:
+        elif len(blog_title) > 100:
             title_error = "Haile you have to correct the length of the words for the title it exceeds the limit."
 
         else:
