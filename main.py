@@ -1,21 +1,17 @@
 
 from flask import Flask, request, redirect, render_template, session
 from flask_sqlalchemy import SQLAlchemy
-
-
 app = Flask(__name__)
 app.config['DEBUG'] = True
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://buildZ:Mypass@localhost:8889/blogZ'
 app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
-
-
 class Blog(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120))
-    content = db.Column(db.String(1000))
+    title = db.Column(db.String(100))
+    content = db.Column(db.String(1200))
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __init__(self, title, content, owner):
@@ -26,15 +22,13 @@ class Blog(db.Model):
 class User(db.Model):
 
         id = db.Column(db.Integer, primary_key=True)
-        username = db.Column(db.String(120), unique=True)
-        password = db.Column(db.String(120))
+        username = db.Column(db.String(100), unique=True)
+        password = db.Column(db.String(100))
         posts = db.relationship('Blog', backref='owner')
 
         def __init__(self, username, password):
             self.username = username
             self.password = password
-
-
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -63,21 +57,20 @@ def signup():
         username = request.form['username']
         password = request.form['password']
         verify = request.form['verify']
-
-        username_error = ''
         existing_username_error = ''
+        username_error = ''
         verify_error = ''
-
-        if len(username)>=120 or len(username)==0:
-            username_error = "Please enter a valid username"
-            return username_error
-
-        if len(username_error)>0:
-            return "Tast"
 
         if password != verify:
             verify_error = "password does not match, please try again"
             return verify_error
+
+        if len(username)>=120 or len(username)==0:
+                username_error = "Please enter a valid username"
+                return username_error
+
+        if len(username_error)>0:
+                return "Tast"
 
 
         existing_user = User.query.filter_by(username=username).first()
@@ -115,7 +108,6 @@ def blog():
         posts = Blog.query.filter_by(owner_id=user_id).all()
         return render_template('blog.html', posts=posts)
 
-
     else:
         blogs= Blog.query.all()
         return render_template('blog.html', page_name = "blog users!", blogs=blogs)
@@ -142,17 +134,17 @@ def add():
         owner = User.query.filter_by(username=session['username']).first()
 
         if not blog_title:
-            title_error = "Please type a title for your blog post"
+            title_error = "you have to have a title for the blog"
         elif len(blog_title) > 120:
-            title_error = "Your title length exceeds the limit, please shorten your title."
+            title_error = "Haile you have to correct the length of the words for the title it exceeds the limit."
 
         else:
             blog_content = request.form['content']
 
             if not blog_content:
-                content_error="Please type something for blog body."
+                content_error="Here is the body of Haile's blog."
             elif len(blog_content)>1000:
-                content_error= "Your blog body is more than 1000 words."
+                content_error= "Haile you have to correct the length of the words it exceeds the limit."
             else:
 
                 new_blog = Blog(blog_title, blog_content, owner)
